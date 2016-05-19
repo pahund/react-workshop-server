@@ -14,7 +14,6 @@ const monthNames = [
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
 
 function getTopicById(id) {
     return data.topics.filter(topic => topic.id == id)[0];
@@ -30,8 +29,7 @@ function getDate() {
 }
 
 router.get("/", (req, res) => res.json({ message: "Welcome to our API!" }));
-router.route("/topics")
-    .get((req, res) => res.json(data.topics));
+router.route("/topics").get((req, res) => res.json(data.topics));
 router.route("/topics/:topicId")
     .get((req, res) => res.json(getTopicById(req.params.topicId)))
     .post(req => {
