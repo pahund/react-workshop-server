@@ -33,9 +33,9 @@ router.get("/", (req, res) => res.json({ message: "Welcome to our API!" }));
 router.route("/topics").get((req, res) => res.json(data.topics));
 router.route("/topics/:topicId")
     .get((req, res) => res.json(getTopicById(req.params.topicId)))
-    .post(req => {
+    .post((req, res) => {
         console.log("received POST data: ", req.body);
-        console.log("topic ID: ", req.params.topicId); // PH_TODO: REMOVE
+        console.log("topic ID: ", req.params.topicId);
         data.topics = data.topics.map(topic => {
             if (topic.id != req.params.topicId) {
                 return topic;
@@ -50,6 +50,7 @@ router.route("/topics/:topicId")
             });
             return topic;
         });
+        res.json({ message: "message was posted!" });
     });
 
 app.use("/api/", router);
