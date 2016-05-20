@@ -14,6 +14,7 @@ const monthNames = [
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 function getTopicById(id) {
     return data.topics.filter(topic => topic.id == id)[0];
@@ -34,6 +35,7 @@ router.route("/topics/:topicId")
     .get((req, res) => res.json(getTopicById(req.params.topicId)))
     .post(req => {
         console.log("received POST data: ", req.body);
+        console.log("topic ID: ", req.params.topicId); // PH_TODO: REMOVE
         data.topics = data.topics.map(topic => {
             if (topic.id != req.params.topicId) {
                 return topic;
